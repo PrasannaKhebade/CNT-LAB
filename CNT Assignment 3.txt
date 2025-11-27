@@ -1,0 +1,80 @@
+Assignment No: 3
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+Title: Dijkstra Algorithm.
+Problem Statement: Write a program to find the shortest path using Dijkstra Equation for Link State Routing Protocol which is used by Open Shortest Path First Protocol (OSPF) in the Internet for the network flow provided by instructor.
+Course Objective: To learn networking standards, IP packet switching and routing used in the Internet.
+Course Outcome: Build wired and wireless intranet with correct communication and service frameworks.
+Tools Required: Eclipse, Java.
+Theory:
+1. Link State Routing Protocol
+Link State Routing Protocols are dynamic routing protocols used within packet-switched networks to determine the best path for data by sharing information about each router's direct neighbours with every other router in the network. The most common example is OSPF (Open Shortest Path First), which operates within an Autonomous System (AS) by maintaining a link-state database reflecting the entire network topology. Routers flood link-state advertisements (LSAs) to all routers only when changes occur, allowing each router to calculate the shortest path using Dijkstra's Algorithm (Shortest Path First). This method minimizes routing loops with mechanisms like Time to Live (TTL), though it can generate heavy traffic due to flooding.
+2. Dijkstra's Algorithm
+Dijkstra's Algorithm is an optimal graph search method used to find the shortest path from a source node to all other nodes in a weighted graph, ensuring the least-cost route. It systematically explores nodes with the smallest tentative distance first, updating path costs until the shortest paths to all reachable nodes are determined, making it widely used in routing protocols and network path calculations.
+2.1 Working of algorithm
+In OSPF, each router identifies its neighbors and calculates the cost to reach them based on metrics like delay, bandwidth, or hop count. Routers exchange Link State Advertisements (LSAs) to share topology information, and each constructs a Link State Database (LSDB) representing the full network graph. Dijkstra's Algorithm is then run on this LSDB to compute the Shortest Path Tree (SPT), and the results are stored in the routing table, listing the next-hop and cost for each destination.
+2.2 Steps
+The algorithm begins by setting the source distance to 0 and all others to infinity. A priority queue (or visited/unvisited set) is maintained, and the unvisited node with the smallest distance is selected. Distances to its adjacent nodes are updated if a shorter path is found. The current node is then marked as visited, and the process repeats until all nodes are visited, ensuring shortest paths to all reachable nodes are determined.
+
+Program:
+import java.util.*;
+public class dijkstrasalgo {
+    static final int inf = Integer.MAX_VALUE;
+    static int n = 7;
+    static String[] v = {"a", "b", "c", "d", "e", "f", "g"};
+    public static void dijkstraAlgo(int[][] g, int s) {
+        int[] dist = new int[n];
+        boolean[] vis = new boolean[n];
+        String[] path = new String[n];
+        Arrays.fill(dist, inf);
+        Arrays.fill(vis, false);
+        for (int i = 0; i < n; i++) {
+            path[i] = v[s];
+        }
+        dist[s] = 0;
+        for (int i = 0; i < n - 1; i++) {
+            int u = minDist(dist, vis);
+            vis[u] = true;
+
+            for (int j = 0; j < n; j++) {
+                if (!vis[j] && g[u][j] != 0 && dist[u] != inf && dist[u] + g[u][j] < dist[j]) {
+                    dist[j] = dist[u] + g[u][j];
+                    path[j] = path[u] + "->" + v[j];
+                }
+            }
+        }
+        System.out.println("shortest paths from " + v[s] + ":");
+        for (int i = 0; i < n; i++) {
+            if (i != s) {
+                System.out.println(v[s] + " -> " + v[i] + " = " + dist[i] + " (" + path[i] + ")");
+            }
+        }
+    }
+    public static int minDist(int[] dist, boolean[] vis) {
+        int min = inf, idx = -1;
+        for (int i = 0; i < n; i++) {
+            if (!vis[i] && dist[i] <= min) {
+                min = dist[i];
+                idx = i;
+            }
+        }
+        return idx;
+    }
+    public static void main(String[] args) {
+        int[][] g = {
+            {0, 2, 5, 0, 0, 0, 0},
+            {2, 0, 1, 2, 0, 0, 0},
+            {5, 1, 0, 3, 1, 4, 0},
+            {0, 2, 3, 0, 2, 0, 3},
+            {0, 0, 1, 2, 0, 0, 5},
+            {0, 0, 4, 0, 0, 0, 2},
+            {0, 0, 0, 3, 5, 2, 0}
+        };
+        dijkstraAlgo(g, 0);
+    }
+    public static int getInf() {
+        return inf;
+    }
+}
+
+Result:
+

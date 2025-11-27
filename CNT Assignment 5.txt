@@ -1,0 +1,149 @@
+Assignment No: 5
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+Title: Client server programs using UDP Berkeley socket primitives.
+Problem Statement: Write the client server programs using UDP Berkeley socket primitives for wired /wireless network for following a. to say Hello to Each other b. Calculator (Trigonometry).
+Course Objective: To learn transport layer and application layer protocols used in the Internet.
+Course Outcome: Develop Client-Servers by the means of correct standards, protocols and technologies.
+Tools Required: Eclipse, Java.
+Theory:
+1. Introduction:
+The term network programming refers to writing programs that execute across multiple devices (computers), in which the devices are all connected to each other using a network.
+The java.net package of the J2SE APIs contains a collection of classes and interfaces that provide the low-level communication details, allowing you to write programs that focus on solving the problem at hand.
+The java.net package provides support for the two common network protocols:
+TCP: TCP stands for Transmission Control Protocol, which allows for reliable communication between two applications. TCP is typically used over the Internet Protocol, which is referred to as TCP/IP.
+UDP: UDP stands for User Datagram Protocol, a connection-less protocol that allows for packets of data to be transmitted between applications.
+2.      What is UDP?
+UDP (User Datagram Protocol) is a connectionless, lightweight transport protocol that allows applications to send and receive datagrams without establishing a connection. It is faster but less reliable than TCP, as it does not guarantee delivery, ordering, or error checking.
+2.1 Berkeley Sockets Model
+The Berkeley Sockets API is a low-level network communication interface originally developed for UNIX systems. Java's java.net package provides a high-level abstraction of Berkeley Sockets.
+In UDP communication, Berkeley Sockets provide:
+No connection establishment: Send and receive packets independently.
+Datagram-based communication: Each message is sent as an individual packet.
+Best-effort delivery: No guarantee of packet arrival or order.
+
+Program:
+a. To say Hello to Each other:
+Server:
+import java.net.*;
+public class UdpServer {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket dsock = new DatagramSocket(5000);
+        byte[] receiveBuf = new byte[1024];
+        DatagramPacket recvPack = new DatagramPacket(receiveBuf, receiveBuf.length);
+        dsock.receive(recvPack);
+        String receivedMsg = new String(recvPack.getData(), 0, recvPack.getLength());
+        System.out.println("Received: " + receivedMsg);
+
+        String replyMsg = "Hello from Server";
+        byte[] sendBuf = replyMsg.getBytes();
+        InetAddress clientAddr = recvPack.getAddress();
+        int clientPort = recvPack.getPort();
+        DatagramPacket sendPack = new DatagramPacket(sendBuf, sendBuf.length, clientAddr, clientPort);
+        dsock.send(sendPack);
+        dsock.close();
+    }
+}
+
+Client:
+import java.net.*;
+
+public class UdpClient {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket csock = new DatagramSocket();
+        String sendMsg = "Hello from Client";
+        byte[] outBuf = sendMsg.getBytes();
+        InetAddress serverAddr = InetAddress.getByName("localhost");
+        DatagramPacket outPack = new DatagramPacket(outBuf, outBuf.length, serverAddr, 5000);
+        csock.send(outPack);
+
+        byte[] inBuf = new byte[1024];
+        DatagramPacket inPack = new DatagramPacket(inBuf, inBuf.length);
+        csock.receive(inPack);
+        String serverReply = new String(inPack.getData(), 0, inPack.getLength());
+        System.out.println("Server Reply: " + serverReply);
+        csock.close();
+    }
+}
+
+Result:
+
+b. Calculator (Trigonometry)
+Server:
+package Calculator;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.util.StringTokenizer;
+
+public class Server {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket udpServer = new DatagramSocket(9877);
+        byte[] bufIn = new byte[1024];
+        byte[] bufOut;
+
+        while (true) {
+            DatagramPacket pktIn = new DatagramPacket(bufIn, bufIn.length);
+            udpServer.receive(pktIn);
+            String reqData = new String(pktIn.getData(), 0, pktIn.getLength());
+
+            StringTokenizer tokens = new StringTokenizer(reqData, " ");
+            String cmd = tokens.nextToken();
+            double angle = Double.parseDouble(tokens.nextToken());
+
+            double res;
+            switch (cmd.toLowerCase()) {
+                case "sin": res = Math.sin(Math.toRadians(angle)); break;
+                case "cos": res = Math.cos(Math.toRadians(angle)); break;
+                case "tan": res = Math.tan(Math.toRadians(angle)); break;
+                default: res = Double.NaN;
+            }
+
+            String strResult = "Result: " + res;
+            bufOut = strResult.getBytes();
+            DatagramPacket pktOut = new DatagramPacket(bufOut, bufOut.length,
+                    pktIn.getAddress(), pktIn.getPort());
+            udpServer.send(pktOut);
+        }
+    }
+}
+
+Client:
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.Scanner;
+
+public class Client {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket sock = new DatagramSocket();
+        InetAddress hostAddr = InetAddress.getByName("localhost");
+        Scanner keyboard = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Enter operator (sin/cos/tan): ");
+            String operator = keyboard.next();
+            System.out.print("Enter number: ");
+            double value = keyboard.nextDouble();
+
+            String dataToSend = operator + " " + value;
+            byte[] sendBytes = dataToSend.getBytes();
+            DatagramPacket packetOut = new DatagramPacket(sendBytes, sendBytes.length, hostAddr, 9877);
+            sock.send(packetOut);
+
+            byte[] recvBytes = new byte[1024];
+            DatagramPacket packetIn = new DatagramPacket(recvBytes, recvBytes.length);
+            sock.receive(packetIn);
+            String serverMsg = new String(packetIn.getData(), 0, packetIn.getLength());
+            System.out.println(serverMsg);
+
+            System.out.print("Do you want to continue? (yes/no): ");
+            if (!keyboard.next().equalsIgnoreCase("yes")) break;
+        }
+
+        sock.close();
+        keyboard.close();
+    }
+}
+
+Result:
+

@@ -1,0 +1,213 @@
+Assignment No: 4
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+Title: Client server programs using TCP Berkeley socket.
+Problem Statement: Write the client server programs using TCP Berkeley socket primitives for wired /wireless network for following a. to say Hello to Each other b. File transfer.
+Course Objective: To learn transport layer and application layer protocols used in the Internet.
+Course Outcome: Develop Client-Servers by the means of correct standards, protocols and technologies.
+Tools Required: Eclipse, Java.
+Theory:
+1. Introduction:
+Network programming is the practice of writing programs that run across multiple devices connected via a network. In Java, the java.net package provides classes and interfaces to handle low-level communication so developers can focus on application logic. It supports two main protocols: TCP - a reliable, connection-oriented protocol (usually combined with IP as TCP/IP), and UDP - a lightweight, connectionless protocol for sending packets without guaranteed delivery.
+2. Berkeley Socket Primitives
+The Berkeley Sockets API, developed at UC Berkeley, underpins network communication in UNIX, Linux, and Windows. For TCP, key primitives include:
+socket() - Create a socket descriptor.
+bind() - Assign socket to a local IP and port.
+listen() - Set socket to accept incoming connections.
+accept() - Accept and return a new socket for communication
+connect() - Client initiates a server connection.
+send()/write() - Transmit data.
+recv()/read() - Receive data.
+close() - Terminate the connection.
+3. Socket Programming Flow (TCP):
+Server: Create socket ? bind to IP & port ? listen for clients ? accept connections ? exchange data via read()/write() ? close.
+Client: Create socket ? connect to server ? exchange data ? close connection.
+4. Socket Programming using JAVA:
+In Java TCP communication, the server uses a ServerSocket to listen on a port and waits for connections using accept(). The client uses a Socket to connect to the server's host and port. Once connected, both can exchange data through input/output streams. Java provides java.net.ServerSocket for servers and java.net.Socket for clients, enabling two-way communication.
+Programs: 
+We have Successfully Wrote a client server programs using TCP Berkeley socket primitives for following 
+a) Say Hello to Each other
+Server:
+import java.io.*;
+import java.net.*;
+
+public class ChatServer {
+    public static void main(String[] args) {
+        int port = 65432;
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server started. Waiting for client...");
+            try (Socket clientSocket = serverSocket.accept();
+                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                 BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
+
+                System.out.println("Client connected.");
+                while (true) {
+                    String msg = in.readLine();
+                    if (msg == null) break;
+                    System.out.println("Client says: " + msg);
+
+                    if (msg.trim().equalsIgnoreCase("bye")) {
+                        out.println("bye");
+                        break;
+                    }
+
+                    System.out.print("Server: ");
+                    String reply = userInput.readLine();
+                    out.println(reply);
+
+                    if (reply.equalsIgnoreCase("bye")) {
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+Client:
+import java.io.*;
+import java.net.*;
+
+public class ChatClient {
+    public static void main(String[] args) {
+        String host = "192.168.56.1";
+        int port = 65432;
+
+        try (Socket socket = new Socket(host, port);
+             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+            System.out.println("Type your messages. Type 'bye' to quit.");
+            while (true) {
+                System.out.print("Client: ");
+                String msg = userInput.readLine();
+                out.println(msg);
+
+                if (msg.equalsIgnoreCase("bye")) {
+                    break;
+                }
+
+                String response = in.readLine();
+                System.out.println("Server says: " + response);
+
+                if (response != null && response.trim().equalsIgnoreCase("bye")) {
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+Result:
+
+b) File Sharing:
+Server:
+import java.io.*;
+import java.net.*;
+
+public class FileServer {
+    public static void startServer(String host, int port, String filename) {
+        try (ServerSocket serverSocket = new ServerSocket(port, 1, InetAddress.getByName(host))) {
+            System.out.println("Server listening on " + host + ":" + port);
+            try (Socket clientSocket = serverSocket.accept();
+                 InputStream in = clientSocket.getInputStream();
+                 OutputStream out = clientSocket.getOutputStream()) {
+
+                System.out.println("Connected by " + clientSocket.getInetAddress());
+
+                byte[] commandBuffer = new byte[1024];
+                int commandLen = in.read(commandBuffer);
+                String command = new String(commandBuffer, 0, commandLen);
+
+                if (command.equals("GETFILE")) {
+                    File file = new File(filename);
+                    if (file.exists()) {
+                        out.write("FILE_FOUND".getBytes());
+                        out.flush();
+
+                        try (FileInputStream fileIn = new FileInputStream(file)) {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            while ((bytesRead = fileIn.read(buffer)) != -1) {
+                                out.write(buffer, 0, bytesRead);
+                            }
+                        }
+                        out.write("__END__".getBytes());
+                        out.flush();
+                    } else {
+                        out.write("FILE_NOT_FOUND".getBytes());
+                        out.flush();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createSampleFile(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("This is a sample file for transfer via TCP socket.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        String filename = "sample.txt";
+        createSampleFile(filename);
+        startServer("127.0.0.1", 12345, filename);
+    }
+}
+
+Client:
+import java.io.*;
+import java.net.*;
+
+public class FileClient {
+    public static void getFile(String host, int port, String filename) {
+        try (Socket socket = new Socket(host, port);
+             OutputStream out = socket.getOutputStream();
+             InputStream in = socket.getInputStream();
+             FileOutputStream fileOut = new FileOutputStream(filename)) {
+
+            out.write("GETFILE".getBytes());
+            out.flush();
+
+            byte[] status = new byte[1024];
+            int statusLen = in.read(status);
+            String statusMsg = new String(status, 0, statusLen);
+
+            if (statusMsg.equals("FILE_FOUND")) {
+                byte[] buffer = new byte[1024];
+                while (true) {
+                    int bytesRead = in.read(buffer);
+                    if (bytesRead == -1) break;
+                    String chunk = new String(buffer, 0, bytesRead);
+                    if (chunk.contains("__END__")) {
+                        fileOut.write(chunk.replace("__END__", "").getBytes());
+                        break;
+                    }
+                    fileOut.write(buffer, 0, bytesRead);
+                }
+                System.out.println("File received and saved as " + filename);
+            } else {
+                System.out.println("File not found on server.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        getFile("127.0.0.1", 12345, "received.txt");
+    }
+}
+
+Result:
+

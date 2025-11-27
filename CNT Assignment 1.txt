@@ -1,0 +1,36 @@
+Assignment No: 1
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+Title: Setting up a small network (2PC/4 PC) and configuration for sharing resources.
+Problem Statement: Setting up small wired computer network: Set up a small wired network of 2 to 4 computers using Hub/Switch/. It includes Preparation of Cables and setting up wired network.
+Course Objective: To learn transmission mediums, networking devices and topologies used in the Internet.
+Course Outcome: Select topology, essential components of physical layer and networking devices to design computer networks.
+Tools Required: Computer, LAN Cards, RJ-45 Connectors, Hub/Switch, CAT-5 Cable, Cable tester, Crimping tool, etc.
+Theory:
+1. Introduction
+Computer networks connect computers and devices to share data and resources. LANs link workstations (WS) and servers via cables; modems enable long-distance communication by converting digital to analog signals and vice versa.
+2. Network Devices
+NIC connects PCs to the network (Arcnet, Ethernet, Token Ring).
+A Hub is a central connector that broadcasts data to all connected devices; types include Passive, Active, and Intelligent.
+A Bridge connects LAN segments using MAC addresses and reduces collisions.
+A Switch sends data only to the intended device, is faster, and reduces collisions.
+A Router connects different networks using IP addressing and selects the best path for data transmission.
+3. Cabling & Pairing
+CAT-5 cable pairs are White/Orange, Orange, White/Green, Green, White/Brown, and Brown.
+A Straight cable is used for Node to Switch connections; a Cross cable is used for Node to Node or Switch to Switch.
+Crimping RJ-45 involves stripping the cable, aligning wires, cutting evenly, inserting into the connector, crimping, and testing.
+4. Transmission Media
+Twisted Pair cable is inexpensive and reduces interference.
+Coaxial cable has a shielded copper core and resists EMI.
+Fiber Optic cable uses light for high-speed, long-distance data transfer.
+Wireless media uses radio or microwave signals for flexible, mobile communication.
+5. Topologies
+Bus topology uses a single backbone cable, is low cost, but a single break stops the whole network.
+Star topology connects each device to a central hub, easy to add or remove devices, but hub failure stops the network.
+Ring topology connects devices in a circle, good for moderate traffic, but one failure can stop the network.
+Mesh topology connects every node directly to every other, is reliable but expensive.
+Tree topology connects star networks along a backbone, scalable but backbone failure disrupts all.
+Hybrid topology combines two or more different topologies, offering flexibility but adding complexity.
+Conclusion:
+The cable was prepared with the correct T568B wiring sequence on both ends. The pairs were neatly arranged, and the crimping was secure.
+
+

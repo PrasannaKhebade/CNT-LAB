@@ -1,0 +1,39 @@
+Assignment No:2
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+Title: Setting up small wireless computer network and hands-on networking command
+Problem Statement: Set up a small wired network of 2 to 4 computers using access point and ask students to access it on their wireless gadgets. Hands on for network commands - ping, pathping, ipconfig/ifconfig, arp, netstat, nbtstat, nslookup, route, traceroute/tracert, nmap. 
+Course Objective: To learn transmission mediums, networking devices and topologies used in the Internet.
+Course Outcome: Select topology, essential components of physical layer and networking devices to design computer networks.
+Tools Required: Access point, Personal Computer/Laptop with wireless connectivity.
+
+Theory:
+
+1.  Access Point
+An Access Point (AP) is a networking device that connects wireless devices like laptops, smartphones, and tablets to a wired Local Area Network (LAN) via Wi-Fi, acting as a bridge between the two. It provides wireless connectivity by broadcasting an SSID, authenticates users with security protocols such as WPA2/WPA3, extends network coverage, and manages traffic by distributing bandwidth among clients. Connected to a router or switch through Ethernet, it forwards data between wireless devices and the internet or local resources, offering mobility, reduced cabling needs, easy scalability, and support for common Wi-Fi standards like IEEE 802.11 a/b/g/n/ac/ax.
+
+2. Wireless Gadgets
+Wireless gadgets are electronic devices that connect to networks or other devices without physical cables, using technologies like Wi-Fi, Bluetooth, cellular (3G/4G/5G), and protocols such as Zigbee/Z-Wave for IoT. Common examples include smartphones, laptops, tablets, smart TVs, Wi-Fi printers, smartwatches, IoT devices (smart bulbs, thermostats, security cameras), and wireless headphones. These gadgets enable data exchange wirelessly, offering mobility, ease of use, flexibility, and portability for tasks like internet access, communication, multimedia, smart home automation, and wireless printing.
+
+3. Networking Commands
+Network commands are tools used in operating systems to monitor, troubleshoot, and manage network connections, configurations, and communication.
+
+3.1.  tracert: Traces the path packets take to reach a destination and shows each network hop with delay times.
+
+3.2.  pathping: Combines tracert and ping to show route, latency, and packet loss for each hop
+
+
+
+3.3.  ipconfig: Displays and manages network configuration (IP, subnet mask, gateway).
+
+3.4.  arp: Views and manages IP-to-MAC address mappings in the ARP cache.
+
+3.5.  netstat: Shows active network connections, ports, routing tables, and statistics.
+
+3.6.  nbtstat: Displays and troubleshoots NetBIOS name resolution information.
+
+3.7. nslookup: Queries DNS to get domain-to-IP or IP-to-domain mapping.
+
+3.8. route: Views or modifies the system's IP routing table.
+
+3.9. nmap: Scans networks to discover hosts, open ports, services, and security details.
+

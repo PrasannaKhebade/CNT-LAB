@@ -1,0 +1,326 @@
+Assignment No:7
+
+Name: Prasanna Khebade 	Roll No: 15 	PRN: 12311687 		Div: CS (AI) - B
+
+Title: Design and develop a website.
+Problem Statement: Design and develop a website using toggleable or dynamic tabs or pills with bootstrap and JQuery to show the relevance of SDP, EDI, DT and Course projects in VIT.
+Course Objective: To learn front end technologies for website development.
+Course Outcome: Build single page applications using REACT as a reusable UI component technology
+Tools Required: Notepad++ Editor, Google Crome, HTML, Bootstrap, JQuery.
+Theory:
+1. Bootstrap
+* Bootstrap is a free front-end framework for faster and easier web development
+* Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins
+* Bootstrap also gives you the ability to easily create responsive designs
+* Bootstrap 5 (released 2021) is the newest version of Bootstrap (released 2013); with new components, faster stylesheet and more responsiveness.
+* Bootstrap 5 supports the latest, stable releases of all major browsers and platforms. However, Internet Explorer 11 and down is not supported.
+* The main differences between Bootstrap 5 and Bootstrap 3 & 4, is that Bootstrap 5 has switched to vanilla JavaScript instead of jQuery.
+1.1 Why Use Bootstrap?
+* Easy to use: Anybody with just basic knowledge of HTML and CSS can start using Bootstrap
+* Responsive features: Bootstrap's responsive CSS adjusts to phones, tablets, and desktops
+* Mobile-first approach: In Bootstrap, mobile-first styles are part of the core framework
+* Browser compatibility: Bootstrap 5 is compatible with all modern browsers (Chrome, Firefox, Edge, Safari, and Opera). 
+1.2 Bootstrap 5 CDN
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+2. Bootstrap Component
+2.1 Bootstrap 5 Containers
+Containers are used to pad the content inside of them, and there are two container classes available:
+1. The .container class provides a responsive fixed width container
+2. The .container-fluid class provides a full width container, spanning the entire width of the viewport
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  
+<div class="container">
+  <h1>My First Bootstrap Page</h1>
+  <p>This part is inside a .container class.</p>
+  <p>The .container class provides a responsive fixed width container.</p>
+  <p>Resize the browser window to see that the container width will change at different breakpoints.</p>
+</div>
+
+</body>
+</html>
+2.2 Bootstrap 5 Grid System
+Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page.
+If you do not want to use all 12 columns individually, you can group the columns together to create wider columns:
+The grid system is responsive, and the columns will re-arrange automatically depending on the screen size.
+Make sure that the sum adds up to 12 or fewer (it is not required that you use all 12 available columns).
+The Bootstrap 5 grid system has six classes:
+* .col- (extra small devices - screen width less than 576px)
+* .col-sm- (small devices - screen width equal to or greater than 576px)
+* .col-md- (medium devices - screen width equal to or greater than 768px)
+* .col-lg- (large devices - screen width equal to or greater than 992px)
+* .col-xl- (xlarge devices - screen width equal to or greater than 1200px)
+* .col-xxl- (xxlarge devices - screen width equal to or greater than 1400px)
+The classes above can be combined to create more dynamic and flexible layouts.
+The following example shows how to create three equal-width columns, on all devices and screen widths:
+<div class="container-fluid mt-3">
+  <h1>Three equal width columns</h1>
+  <p>Note: Try to add a new div with class="col" inside the row class - this will create four equal-width columns.</p>
+  <div class="row">
+    <div class="col p-3 bg-primary text-white">.col</div>
+    <div class="col p-3 bg-dark text-white">.col</div>
+    <div class="col p-3 bg-primary text-white">.col</div>
+  </div>
+</div>
+2.3 Text Colors
+Bootstrap 5 has some contextual classes that can be used to provide "meaning through colors".
+The classes for text colors are: .text-muted, .text-primary, .text-success, .text-info, .text-warning, .text-danger, .text-secondary, .text-white, .text-dark, .text-body (default body color/often black) and .text-light.
+<div class="container mt-3">
+  <h2>Contextual Colors</h2>
+  <p>Use the contextual classes to provide "meaning through colors":</p>
+  <p class="text-muted">This text is muted.</p>
+  <p class="text-primary">This text is important.</p>
+  <p class="text-success">This text indicates success.</p>
+  <p class="text-info">This text represents some information.</p>
+  <p class="text-warning">This text represents a warning.</p>
+  <p class="text-danger">This text represents danger.</p>
+  <p class="text-secondary">Secondary text.</p>
+  <p class="text-dark">This text is dark grey.</p>
+  <p class="text-body">Default body color (often black).</p>
+  <p class="text-light">This text is light grey (on white background).</p>
+  <p class="text-white">This text is white (on white background).</p>
+</div>
+2.4 Background Colors
+The classes for background colors are: .bg-primary, .bg-success, .bg-info, .bg-warning, .bg-danger, .bg-secondary, .bg-dark and .bg-light.
+
+<div class="container mt-3">
+  <h2>Background Color with Contrasting Text Color</h2>
+  <p class="text-bg-primary">This text is important.</p>
+  <p class="text-bg-success">This text indicates success.</p>
+  <p class="text-bg-info">This text represents some information.</p>
+  <p class="text-bg-warning">This text represents a warning.</p>
+  <p class="text-bg-danger">This text represents danger.</p>
+  <p class="text-bg-secondary">Secondary background color.</p>
+  <p class="text-bg-dark">Dark grey background color.</p>
+  <p class="text-bg-light">Light grey background color.</p>
+</div>
+2.5 Bootstrap 5 Tables
+A basic Bootstrap 5 table has a light padding and horizontal dividers.
+The .table class adds basic styling to a table.
+<div class="container mt-3">
+  <h2>Basic Table</h2>
+  <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>3.1 How to use jQuery?
+There are two ways to use jQuery.
+Local Installation - You can download jQuery library on your local machine and include it in your HTML code.
+Go to the https://jquery.com/download/ to download the latest version available.
+Now put downloaded jquery-3.7.1.min.js file in a directory of your website, e.g. /jquery.
+
+CDN Based Version - You can include jQuery library into your HTML code directly from Content Delivery Network (CDN).
+
+3.2 jQuery Syntax
+The jQuery syntax is tailor-made for selecting HTML elements and performing some action on the element(s).
+
+Basic syntax is: $(selector).action()
+
+* A $ sign to define/access jQuery
+* A (selector) to "query (or find)" HTML elements
+* A jQuery action() to be performed on the element(s)
+
+Examples:
+$(this).hide() - hides the current element.
+$("p").hide() - hides all <p> elements.
+$(".test").hide() - hides all elements with class="test".
+$("#test").hide() - hides the element with id="test".
+
+3.3 jQuery Selectors
+jQuery selectors allow you to select and manipulate HTML element(s).
+jQuery selectors are used to "find" (or select) HTML elements based on their name, id, classes, types, attributes, values of attributes and much more. It's based on the existing CSS Selectors, and in addition, it has some own custom selectors.
+All selectors in jQuery start with the dollar sign and parentheses: $().
+3.3.1 The element Selector
+The jQuery element selector selects elements based on the element name.
+You can select all <p> elements on a page like this:  $("p")
+3.3.2 The #id Selector
+The jQuery #id selector uses the id attribute of an HTML tag to find the specific element.
+An id should be unique within a page, so you should use the #id selector when you want to find a single, unique element.
+To find an element with a specific id, write a hash character, followed by the id of the HTML element:    $("#test")
+3.3.3 The .class Selector
+The jQuery class selector finds elements with a specific class.
+To find elements with a specific class, write a period character, followed by the name of the class: $(".test")
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $(".test").hide();
+    });
+});
+</script>
+</head>
+<body>
+<h2 class="test">This is a heading</h2>
+<p class="test">This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<button>Click me</button>
+</body>
+</html>3.4 jQuery Event
+All the different visitor's actions that a web page can respond to are called events.
+An event represents the precise moment when something happens.
+Examples:
+* moving a mouse over an element
+* selecting a radio button
+* clicking on an element
+Mouse EventsKeyboard EventsForm EventsDocument/Window Eventsclickkeypresssubmitloaddblclickkeydownchangeresizemouseenterkeyupfocusscrollmouseleave blurunload3.4.1 Commonly Used jQuery Event Methods
+$(document).ready()
+The $(document).ready() method allows us to execute a function when the document is fully loaded. 
+click()
+The click() method attaches an event handler function to an HTML element. The function is executed when the user clicks on the HTML element.
+dblclick()
+The dblclick() method attaches an event handler function to an HTML element. The function is executed when the user double-clicks on the HTML element.
+mouseenter()
+The mouseenter() method attaches an event handler function to an HTML element. The function is executed when the mouse pointer enters the HTML element.
+mouseleave()
+The mouseleave() method attaches an event handler function to an HTML element. The function is executed when the mouse pointer leaves the HTML element.
+mousedown()
+The mousedown() method attaches an event handler function to an HTML element. The function is executed, when the left, middle or right mouse button is pressed down, while the mouse is over the HTML element.
+mouseup()
+The mouseup() method attaches an event handler function to an HTML element. The function is executed, when the left, middle or right mouse button is released, while the mouse is over the HTML element.
+hover()
+The hover() method takes two functions and is a combination of the mouseenter() and mouseleave()  methods. The first function is executed when the mouse enters the HTML element, and the second function is executed when the mouse leaves the HTML element.
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#p1").hover(function(){
+        alert("You entered p1!");
+    },
+    function(){
+        alert("Bye! You now leave p1!");
+    }); 
+});
+</script>
+</head>
+<body>
+<p id="p1">This is a paragraph.</p>
+</body>
+</html>
+Conclusion: Hence, we have successfully designed and developed a website using toggleable or dynamic tabs (pills) with Bootstrap and jQuery to showcase the relevance of SDP, EDI, DT, and Course Projects in VIT.
+
+Program:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT Projects Relevance</title> 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Relevance of Projects in VIT</h2> 
+        <!-- Nav Pills -->
+        <ul class="nav nav-pills mb-3 justify-content-center" id="projectTabs" role="tablist">
+            <li class="nav-item" role="presentation"> <button class="nav-link active" id="sdp-tab" data-bs-toggle="pill"
+                    data-bs-target="#sdp" type="button" role="tab">SDP</button> </li>
+            <li class="nav-item" role="presentation"> <button class="nav-link" id="edi-tab" data-bs-toggle="pill"
+                    data-bs-target="#edi" type="button" role="tab">EDI</button> </li>
+            <li class="nav-item" role="presentation"> <button class="nav-link" id="dt-tab" data-bs-toggle="pill"
+                    data-bs-target="#dt" type="button" role="tab">DT</button> </li>
+            <li class="nav-item" role="presentation"> <button class="nav-link" id="course-tab" data-bs-toggle="pill" 
+                    data-bs-target="#course" type="button" role="tab">Course Projects</button> </li>
+        </ul> 
+        <!-- Tab Content -->
+        <div class="tab-content p-4 border bg-white shadow rounded" id="projectTabsContent">
+            <div class="tab-pane fade show active" id="sdp" role="tabpanel">
+                <h4>SDP (Software Development Project)</h4>
+                <p>The SDP focuses on building complete software solutions where students learn end-to-end development,
+                    teamwork, and project management practices. It enhances coding skills, testing, and documentation
+                    aligned with industry standards.</p>
+            </div>
+            <div class="tab-pane fade" id="edi" role="tabpanel">
+                <h4>EDI (Engineering Design and Innovation)</h4>
+                <p>EDI emphasizes innovation, problem-solving, and engineering design skills. Students apply design
+                    thinking approaches to create prototypes, implement solutions, and develop critical thinking
+                    abilities relevant to real-world challenges.</p>
+            </div>
+            <div class="tab-pane fade" id="dt" role="tabpanel">
+                <h4>DT (Design Thinking)</h4>
+                <p>Design Thinking projects encourage creativity, empathy, and innovative problem analysis. Students
+                    learn to explore user needs, brainstorm ideas, and develop impactful solutions that can be
+                    implemented in academic and industrial contexts.</p>
+            </div>
+            <div class="tab-pane fade" id="course" role="tabpanel">
+                <h4>Course Projects</h4>
+                <p>Course-based projects are integrated into regular curriculum subjects. They provide hands-on
+                    learning, practical applications of theoretical concepts, and prepare students for higher-level
+                    research and industry internships.</p>
+            </div>
+        </div>
+    </div> 
+    <!-- jQuery Script Example -->
+    <script> $(document).ready(function () { // Highlight active tab in console (demo of jQuery usage) $('#projectTabs button').on('shown.bs.tab', function (event) { console.log("Active Tab: " + $(event.target).text()); });
+
+        }); </script>
+</body>
+
+</html>
+Output: 
+
+
+
+
+
+
+
+
+
+
+
+Subject Name- CI3001: Computer Network Technology                 Class/Branch: TY- CSAI-B
+
+
+Computer Science and Engineering (Artificial Intelligence), VIT Pune.0Page 1
+
+
+
+
